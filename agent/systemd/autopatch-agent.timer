@@ -1,0 +1,10 @@
+[Unit]
+Description=AUTO PATCH Agent Timer
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=60s
+Persistent=true
+
+[Install]
+WantedBy=timers.target

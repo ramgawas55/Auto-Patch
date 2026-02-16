@@ -1,0 +1,11 @@
+[Unit]
+Description=AUTO PATCH Agent
+After=network-online.target
+
+[Service]
+Type=oneshot
+EnvironmentFile=/etc/autopatch/agent.env
+ExecStart=/usr/bin/python3 /opt/autopatch/agent.py --once --state-dir /var/lib/autopatch
+
+[Install]
+WantedBy=multi-user.target
