@@ -1,7 +1,14 @@
 # AUTO PATCH — Centralized Linux Patch Management System
 Created by: Ram Gawas
 
-AUTO PATCH is a centralized system to monitor Linux patch status and execute patching via an agent polling model. The backend exposes APIs for inventory, jobs, approvals, and audit logs. The frontend is a Next.js dashboard. The agent runs on external Linux servers and polls every 60 seconds.
+AUTO PATCH is a centralized way to see patch status across Linux servers and safely trigger patch jobs through an agent polling model. The backend stores inventories, jobs, approvals, and audit logs. The frontend gives you a clean dashboard. The agent runs on each Linux server and checks in every 60 seconds.
+
+## What You Get
+- FastAPI backend with JWT auth, approvals workflow, audit logs, and scheduling
+- Next.js App Router dashboard with clean tables and filters
+- PostgreSQL for inventory, updates, jobs, and results
+- Agent that supports apt and yum/dnf without SSH
+- Render-ready deployment via render.yaml
 
 ## Architecture
 - Backend: FastAPI + Uvicorn
@@ -37,9 +44,9 @@ http://localhost:3000
 Email: admin@example.com
 Password: admin123
 ```
-4) Install agent on a Linux VM and point BACKEND_URL to http://localhost:8000
+4) Install agent on a Linux VM and set BACKEND_URL to http://localhost:8000
 5) Server appears within 5 minutes
-6) Schedule a patch job, approve, and watch logs
+6) Create a job, approve it, and watch logs
 
 ## Deploy to Render (Blueprint)
 1) Create a new Render Blueprint and connect this repo
@@ -54,13 +61,15 @@ Password: admin123
 4) Deploy all services
 5) Open the frontend URL and login with ADMIN_EMAIL and ADMIN_PASSWORD
 6) Configure agent BACKEND_URL to the backend Render URL
+7) If you rename services, update FRONTEND_ORIGIN, API_BASE_URL, and NEXT_PUBLIC_API_BASE in Render
 
 Render runs migrations automatically using:
 ```
 alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000
 ```
 
-## Backend Environment Variables
+## Environment Variables
+Backend:
 - DATABASE_URL
 - JWT_SECRET
 - ADMIN_EMAIL
@@ -71,7 +80,7 @@ alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000
 - TELEGRAM_CHAT_ID
 - AGENT_BOOTSTRAP_TOKEN
 
-## Frontend Environment Variables
+Frontend:
 - NEXT_PUBLIC_API_BASE
 - NEXT_PUBLIC_APP_NAME
 
@@ -95,7 +104,7 @@ sudo systemctl enable --now autopatch-agent.timer
 systemctl status autopatch-agent.timer
 ```
 
-Agent runs as root or with sudo permissions for package updates.
+Agent should run as root or with sudo permissions for package updates.
 
 ## API Examples (curl)
 Login:

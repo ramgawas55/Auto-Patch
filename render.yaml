@@ -22,15 +22,9 @@ services:
       - key: ADMIN_PASSWORD
         sync: false
       - key: FRONTEND_ORIGIN
-        fromService:
-          name: autopatch-frontend
-          type: web
-          property: url
+        value: https://autopatch-frontend.onrender.com
       - key: API_BASE_URL
-        fromService:
-          name: autopatch-backend
-          type: web
-          property: url
+        value: https://autopatch-backend.onrender.com
       - key: TELEGRAM_BOT_TOKEN
         sync: false
       - key: TELEGRAM_CHAT_ID
@@ -45,9 +39,6 @@ services:
     startCommand: npm run start
     envVars:
       - key: NEXT_PUBLIC_API_BASE
-        fromService:
-          name: autopatch-backend
-          type: web
-          property: url
+        value: https://autopatch-backend.onrender.com
       - key: NEXT_PUBLIC_APP_NAME
         value: AutoPatch
