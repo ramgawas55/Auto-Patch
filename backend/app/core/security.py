@@ -9,12 +9,19 @@ from app.core.config import settings
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
+def _trim_password(password: str) -> str:
+    encoded = password.encode("utf-8")
+    if len(encoded) <= 72:
+        return password
+    return encoded[:72].decode("utf-8", errors="ignore")
+
+
 def hash_password(password: str) -> str:
-    return pwd_context.hash(password)
+    return pwd_context.hash(_trim_password(password))
 
 
 def verify_password(password: str, password_hash: str) -> bool:
-    return pwd_context.verify(password, password_hash)
+    return pwd_context.verify(_trim_password(password), password_hash)
 
 
 def create_access_token(subject: str) -> str:
