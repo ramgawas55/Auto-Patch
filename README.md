@@ -1,5 +1,6 @@
 # AUTO PATCH — Centralized Linux Patch Management System
-Created by: Ram Gawas
+Project made by Ram Gawas
+GitHub: https://github.com/ramgawas55
 
 AUTO PATCH is a centralized way to see patch status across Linux servers and safely trigger patch jobs through an agent polling model. The backend stores inventories, jobs, approvals, and audit logs. The frontend gives you a clean dashboard. The agent runs on each Linux server and checks in every 60 seconds.
 

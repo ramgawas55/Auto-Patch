@@ -20,6 +20,14 @@ export default function RootLayout({ children }) {
             </div>
           </header>
           <main className="mx-auto max-w-6xl px-6 py-8">{children}</main>
+          <footer className="border-t border-slate-800 bg-slate-950">
+            <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 text-sm text-slate-400">
+              <span>Project made by Ram Gawas</span>
+              <a className="text-blue-400" href="https://github.com/ramgawas55" target="_blank" rel="noreferrer">
+                github.com/ramgawas55
+              </a>
+            </div>
+          </footer>
         </div>
       </body>
     </html>
